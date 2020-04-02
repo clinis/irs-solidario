@@ -1,0 +1,78 @@
+<!doctype html>
+<html class="no-js" lang="pt">
+
+<head>
+  <meta charset="utf-8">
+  <title>IRS Solidário</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+
+  <!--Regular Datatables CSS-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+  <!--Responsive Extension Datatables CSS-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- Add your site or application content here -->
+  <p>Hello world! This is HTML5 Boilerplate.</p>
+  <script src="js/vendor/modernizr-3.8.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <h2>sssssss</h2>
+
+  <table id="example">
+    {% for line in xls.data %}
+      {% if forloop.first == true %}
+        <thead>
+          <td>{{ line.2 }}</td>
+          <td>{{ line.1 }}</td>
+          <td>{{ line.0 }}</td>
+        </thead>
+        <tbody>
+      {% else %}
+        {% if forloop.last == true %}
+          </tbody>
+        {% endif %}
+        <tr>
+          <td>{{ line.2 }}</td>
+          <td>{{ line.1 }}</td>
+          <td>{{ line.0 }}</td>
+        </tr>
+      {% endif %}
+    {% endfor%}
+  </table>
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <!--Datatables -->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var table = $('#example').DataTable( {
+        responsive: true
+      } )
+        .columns.adjust()
+        .responsive.recalc();
+    } );
+  </script>
+</body>
+
+</html>

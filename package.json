@@ -1,0 +1,22 @@
+{
+  "name": "irs-solidario",
+  "version": "1.0.0",
+  "description": "Lista de de entidades autorizadas a beneficiar da consignação de IRS 2019",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^0.10.0",
+    "async-xlsx": "0.0.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "clinis",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/clinis/irs-solidario.git"
+  }
+}
