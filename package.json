@@ -8,17 +8,20 @@
   },
   "dependencies": {
     "@11ty/eleventy": "^0.10.0",
-    "async-xlsx": "0.0.7"
+    "async-xlsx": "0.0.7",
+    "gh-pages": "^2.2.0"
   },
   "scripts": {
     "start": "rm -rf _site && npm run serve",
-    "serve": "npx eleventy --serve",
-    "build": "npx eleventy"
+    "serve": "eleventy --serve",
+    "build": "rm -rf _site && eleventy",
+    "deploy": "rm -rf _site && npm run build && gh-pages -d _site"
   },
   "author": "clinis",
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git://github.com/clinis/irs-solidario.git"
-  }
+  },
+  "homepage": "/irs-solidario"
 }
