@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="pt">
+<html lang="pt">
 
 <head>
   <meta charset="utf-8">
@@ -7,71 +7,98 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
-  <!-- Place favicon.ico in the root directory -->
-
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
-
   <meta name="theme-color" content="#fafafa">
 
-  <!--Regular Datatables CSS-->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-  <!--Responsive Extension Datatables CSS-->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+  <!--Datatables CSS & Bootstrap-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+
+  <style>
+    table {
+      font-size: 0.85rem;
+    }
+    #table-filter {
+      float: left;
+    }
+    #table-footer {
+      display:  flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #associacoes-table_info {
+      padding-top: 0;
+    }
+    #associacoes-table_length label {
+      margin-bottom: 0;
+    }
+  </style>
 </head>
 
 <body>
-  <!--[if IE]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-  <![endif]-->
-
-  <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
-  <script src="js/vendor/modernizr-3.8.0.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
-
-  <h2>sssssss</h2>
-
-  <table id="example">
-    {% for line in xls.data %}
-      {% if forloop.first == true %}
-        <thead>
-          <td>{{ line.2 }}</td>
-          <td>{{ line.1 }}</td>
-          <td>{{ line.0 }}</td>
-        </thead>
-        <tbody>
-      {% else %}
-        {% if forloop.last == true %}
-          </tbody>
-        {% endif %}
-        <tr>
-          <td>{{ line.2 }}</td>
-          <td>{{ line.1 }}</td>
-          <td>{{ line.0 }}</td>
-        </tr>
-      {% endif %}
-    {% endfor%}
-  </table>
+  <main class="container">
+    <h1 class="my-3">Lista Associações Consignação IRS 2019</h1>
+    <div class="row no-gutters">
+      <div class="col-12 table-responsive">
+        <table id="associacoes-table" class="table table-hover table-bordered table-sm">
+          <col style="width:20rem">
+        	<col style="width:30%">
+        	<col style="width:30%">
+          {% for line in xls.data %}
+            {% if forloop.first == true %}
+              <thead class="thead-light">
+                <tr>
+                  <th>{{ line.2 }}</th>
+                  <th>{{ line.1 }}</th>
+                  <th>{{ line.0 }}</th>
+                </tr>
+              </thead>
+              <tbody>
+            {% elsif forloop.last == true %}
+              </tbody>
+            {% else %}
+              <tr>
+                <td>{{ line.2 }}</td>
+                <td>{{ line.1 }}</td>
+                <td>{{ line.0 }}</td>
+              </tr>
+            {% endif %}
+          {% endfor%}
+        </table>
+      </div>
+    </div>
+  </main>
 
   <!-- jQuery -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
   <!--Datatables -->
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
+
   <script>
     $(document).ready(function() {
-      var table = $('#example').DataTable( {
-        responsive: true
-      } )
-        .columns.adjust()
-        .responsive.recalc();
-    } );
+      var table = $('#associacoes-table').DataTable({
+        dom: "<'#table-filter'f><'table-responsive't><'#table-footer'pil>",
+        scrollX: true,
+        language: {
+          info: "_START_ a _END_ de _TOTAL_ resultados",
+          infoFiltered: "(de _MAX_ entradas)",
+          lengthMenu: "Mostrar _MENU_ resultados",
+          paginate: {
+            first: "&laquo;",
+            last: "&laquo;",
+            next: "&rsaquo;",
+            previous: "&lsaquo;"
+          },
+          search: "Procurar",
+          zeroRecords: "Nenhum resultado encontrado.",
+          decimals: ",",
+          thousands: ""
+        },
+        drawCallback: function () {
+          $('.dataTables_paginate > .pagination').addClass('pagination-sm');
+        }
+      })
+    });
   </script>
 </body>
 
