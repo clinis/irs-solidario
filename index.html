@@ -40,8 +40,39 @@
 
 <body>
   <main class="container">
-    <h1 class="my-3">Lista Associações Consignação IRS 2019</h1>
-    <div class="row no-gutters">
+    <h1 class="my-4">IRS Solidário 2019</h1>
+    <p>Nesta página é possível <a href="#lista">ver e procurar</a>, de forma prática, as entidades elegívies a consignação de IRS em 2019.</p>
+    <div class="row">
+      <div class="col">
+        <h2 class="my-3">O que é a consignação de IRS?</h2>
+        <blockquote class="blockquote">
+          <p class="mb-0">Consignação de IRS é o nome dado à parte do IRS que o contribuinte pode doar a uma instituição de solidariedade social em vez de entregar ao Estado. A grande vantagem da consignação de IRS é que para além de ajudar uma causa solidária à sua escolha, esta operação <b>não tem quaisquer custos para si.</b></p>
+          <footer class="blockquote-footer">in <cite title="Source Title"><a href="https://www.economias.pt/consignacao-irs/" target="_blank">Economias</a></cite></footer>
+        </blockquote>
+        <p>Aquando do preenchimento da declaração de IRS, é possível assinalar que uma parte do valor do imposto será doado a uma instituição de solidariedade social. O valor doado não é adicionado ao imposto pago pelo contribuinte, mas sim retirado do valor recebido pelo estado. Ou seja, o contribuinte paga o mesmo valor, mas determina que uma parte vai diretamente para uma instituição.</p>
+        <p class="mb-0">Podem benificiar de consignação de IRS:</p>
+        <ul>
+          <li>Instituições particulares de solidariedade social ou pessoas coletivas de utilidade pública;</li>
+          <li>Instituições culturais com estatuto de utilidade pública;</li>
+          <li>Pessoas coletivas de utilidade pública de fins ambientais;</li>
+          <li>Instituições religiosas.</li>
+        </ul>
+        <p>Todos os anos as Finanças divulgam uma lista das entidades elegíveis a receber a consignação de IRS. Esta lista está disponível para transferência no <a href="https://www.portaldasfinancas.gov.pt" target="_blank">Portal das Finanças</a>.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h2 class="my-3">Qual o valor da consignação?</h2>
+        <blockquote class="blockquote">
+          <p class="mb-0">(...) a consignação de IRS corresponde a <b>0,5%</b> da totalidade dos seus rendimentos depois de deduzidas as despesas suportadas com saúde, educação, imóveis, lares e outras despesas que a lei prevê que podem ser abatidas no IRS.</p>
+          <footer class="blockquote-footer">in <cite title="Source Title"><a href="https://www.economias.pt/consignacao-irs/" target="_blank">Economias</a></cite></footer>
+        </blockquote>
+        <p>Imaginemos que, relativamente ao IRS de 2019, foi alvo de retenções na fonte no valor de € 6000. Ao entregar o IRS em 2020, depois de consideradas as deduções, o valor de imposto liquidado é € 5000. O Estado tem de lhe devolver € 1000.<p>
+        <p>A consignação de IRS calcula-se multiplicando o imposto liquidado (€ 5000) por 0,5%. Neste caso a consignação de IRS seria € 25, recebidos pela instituição; o Estado arrecadará a diferença entre o IRS liquidado e a consignação, ficando apenas com € 4975.</p>
+      </div>
+    </div>
+    <div class="row no-gutters mt-4">
+      <h2 id="lista" class="my-3">Lista de Associações</h2>
       <div class="col-12 table-responsive">
         <table id="associacoes-table" class="table table-hover table-bordered table-sm">
           {% for line in xls.data %}
@@ -66,6 +97,7 @@
           {% endfor%}
         </table>
       </div>
+      <p class="mt-2 mt-md-0"><small>Esta lista foi <a href="https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/IRS/Documents/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2019.xlsx" target="_blank">obtida no Portal das Finanças</a> em 01/04/2020 e está datada em 17/03/2020.</small></p>
     </div>
   </main>
 
