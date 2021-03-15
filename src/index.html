@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>IRS Solidário</title>
+  <meta name="description" content="Ver e procurar, de forma prática, as entidades elegívies a consignação de IRS do ano fiscal 2020.">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="manifest" href="./site.webmanifest">
+
+  <!-- capture the CSS content as a Nunjucks variable -->
+  {%- set css %}
+    {% include "styles/custom-simple-datatables-styles.css" %}
+    {% include "styles/custom-styles.css" %}
+  {% endset %}
+  <!-- feed it through cssmin filter to minify -->
+  <style>
+    {{ css | cssmin | safe }}
+  </style>
+
+</head>
+<body>
+  <main>
+    <h1>IRS Solidário 💸</h1>
+    <p>Nesta página é possível <a href="#lista">ver e procurar</a>, de forma prática, as entidades elegívies a consignação de IRS do ano fiscal 2020.</p>
+
+    <h2>O que é a consignação de IRS?</h2>
+    <blockquote>
+      <p>Consignação de IRS é o nome dado à parte do IRS que o contribuinte pode doar a uma instituição de solidariedade social em vez de entregar ao Estado. A grande vantagem da consignação de IRS é que para além de ajudar uma causa solidária à sua escolha, esta operação <b>não tem quaisquer custos para si.</b></p>
+      <footer>in <cite title="Economias.pt"><a href="https://www.economias.pt/consignacao-irs/" target="_blank" rel="noreferrer">Economias</a></cite></footer>
+    </blockquote>
+    <p>Aquando do preenchimento da declaração de IRS, é possível assinalar que uma <b>parte do valor do imposto será doado a uma instituição de solidariedade social</b>. O valor doado não é adicionado ao imposto pago pelo contribuinte, mas sim retirado do valor recebido pelo estado. Ou seja, o contribuinte paga o mesmo valor, mas determina que uma parte vai diretamente para uma instituição.</p>
+    <p>Podem benificiar de consignação de IRS:</p>
+    <ul>
+      <li>Instituições particulares de solidariedade social ou pessoas coletivas de utilidade pública;</li>
+      <li>Instituições culturais com estatuto de utilidade pública;</li>
+      <li>Pessoas coletivas de utilidade pública de fins ambientais;</li>
+      <li>Instituições religiosas.</li>
+    </ul>
+    <p>Todos os anos as Finanças divulgam uma lista das entidades elegíveis a receber a consignação de IRS. Esta lista está disponível para transferência no <a href="https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/IRS/Pages/IRS_entidades_beneficiarias_consignacao.aspx" target="_blank" rel="noreferrer">Portal das Finanças</a>.</p>
+
+    <h2>Qual o valor da consignação?</h2>
+    <blockquote>
+      <p>(...) a consignação de IRS corresponde a <b>0,5%</b> da totalidade dos seus rendimentos depois de deduzidas as despesas suportadas com saúde, educação, imóveis, lares e outras despesas que a lei prevê que podem ser abatidas no IRS.</p>
+      <footer>in <cite title="Economias.pt"><a href="https://www.economias.pt/consignacao-irs/" target="_blank" rel="noreferrer">Economias</a></cite></footer>
+    </blockquote>
+    <p>Imaginemos que, relativamente ao IRS do ano fiscal de 2020, foi alvo de retenções na fonte no valor de € 6000. Ao entregar o IRS em 2021, depois de consideradas as deduções, o valor de imposto liquidado é € 5000. O Estado tem de lhe devolver € 1000.<p>
+    <p>A consignação de IRS calcula-se multiplicando o imposto liquidado (€ 5000) por 0,5%. Neste caso a consignação de IRS seria € 25, recebidos pela instituição; o Estado arrecadará a diferença entre o IRS liquidado e a consignação, ficando apenas com € 4975.</p>
+
+    <h2 id="lista">Lista de Associações</h2>
+
+    <div id="table-wrapper"></div>
+    <div class="table-container">
+      <table id="table-associacoes">
+        <thead>
+          <tr>
+            <th>Localidade</th>
+            <th>Nome</th>
+            <th>NIF</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for line in xls.data -%}
+        <tr>
+          <td>{{ line[2] }}</td>
+          <td>{{ line[1] }}</td>
+          <td>{{ line[0] }}</td>
+        </tr>
+        {%- endfor%}
+        </tbody>
+
+      </table>
+    </div>
+
+    <details>
+      <summary>
+        <small>Sobre estes dados</small>
+      </summary>
+      <p>Esta lista está datada de 02/03/2021 e foi <a href="https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/IRS/Documents/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2020.xlsx" target="_blank" rel="noreferrer">obtida do Portal das Finanças</a> em 15/03/2021.</p>
+
+      <p>Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão.</p>
+
+      <p>O código-fonte deste site pode ser <a href="https://github.com/clinis/irs-solidario" target="_blank" rel="noreferrer">consultado no GitHub.</a></p>
+    </details>
+
+  </main>
+
+  <!-- Simple Datatables -->
+  <script src="./simple-datatables-scripts.js"></script>
+
+  <!-- Simple Datatables init code -->
+  <script>
+    const table = new simpleDatatables.DataTable("#table-associacoes", {
+      columns: [
+        { select: 0, sort: "asc" },
+      ],
+      searchable: true,
+      layout: {
+        top: "{search}",
+        bottom: "{pager}{info}{select}"
+      },
+      labels: {
+        info: "{start} a {end} de {rows} resultados",
+        placeholder: "Procurar nome ou localidade ou NIF",
+        perPage: "Mostrar {select} resultados",
+        noRows: "Nenhum resultado encontrado.",
+      }
+    })
+  </script>
+</body>
+
+</html>

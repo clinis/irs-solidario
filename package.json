@@ -1,27 +1,37 @@
 {
   "name": "irs-solidario",
-  "version": "1.0.0",
-  "description": "Lista de de entidades autorizadas a beneficiar da consignação de IRS 2019",
-  "main": "index.js",
-  "directories": {
-    "doc": "doc"
-  },
-  "dependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "async-xlsx": "0.0.7",
-    "gh-pages": "^3.1.0"
-  },
-  "scripts": {
-    "start": "rm -rf _site && npm run serve",
-    "serve": "eleventy --serve",
-    "build": "rm -rf _site && eleventy",
-    "deploy": "rm -rf _site && npm run build && gh-pages -d _site"
-  },
+  "version": "2.0.0",
+  "description": "Lista de de entidades autorizadas a beneficiar da consignação de IRS em 2021",
   "author": "clinis",
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git://github.com/clinis/irs-solidario.git"
   },
-  "homepage": "/irs-solidario"
+  "homepage": "/irs-solidario",
+  "dependencies": {
+    "simple-datatables": "^3.0.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.11.0",
+    "async-xlsx": "0.0.7",
+    "clean-css": "^4.2.3",
+    "cross-env": "^7.0.0",
+    "del-cli": "^3.0.0",
+    "gh-pages": "^3.1.0",
+    "htmlnano": "^0.2.8",
+    "npm-run-all": "^4.1.5"
+  },
+  "scripts": {
+    "eleventy:dev": "cross-env ELEVENTY_ENV=development eleventy --serve",
+    "eleventy:prod": "cross-env ELEVENTY_ENV=production eleventy --serve",
+    "eleventy:build": "cross-env ELEVENTY_ENV=production eleventy",
+    "clean": "del-cli dist",
+    "build": "run-s clean eleventy:build",
+    "prod": "npm run eleventy:prod",
+    "dev": "npm run eleventy:dev",
+    "start": "run-s clean eleventy:dev",
+    "deploy:ghpages": "npx gh-pages -d dist",
+    "deploy": "run-s build deploy:ghpages"
+  }
 }
