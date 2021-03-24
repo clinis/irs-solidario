@@ -5,13 +5,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>IRS Solidário</title>
-  <meta name="description" content="Ver e procurar, de forma prática, as entidades elegívies a consignação de IRS do ano fiscal 2020.">
+  <!-- Primary Meta Tags -->
+  <title>{{ metadata.title }}</title>
+  <meta name="title" content="{{ metadata.title }}">
+  <meta name="description" content="{{ metadata.description }}">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-  <link rel="manifest" href="./site.webmanifest">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ metadata.url }}">
+  <meta property="og:title" content="{{ metadata.title }}">
+  <meta property="og:description" content="{{ metadata.description }}">
+  <meta property="og:image" content="{{ metadata.url }}image.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ metadata.url }}">
+  <meta property="twitter:title" content="{{ metadata.title }}">
+  <meta property="twitter:description" content="{{ metadata.description }}">
+  <meta property="twitter:image" content="{{ metadata.url }}image.png">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | url }}">
+  <link rel="manifest" href="{{ '/manifest.json' | url }}">
 
   <!-- capture the CSS content as a Nunjucks variable -->
   {%- set css %}
@@ -26,7 +42,7 @@
 </head>
 <body>
   <main>
-    <h1>IRS Solidário 💸</h1>
+    <h1>{{ metadata.title }}</h1>
     <p>Nesta página é possível <a href="#lista">ver e procurar</a>, de forma prática, as entidades elegívies a consignação de IRS do ano fiscal 2020.</p>
 
     <h2>O que é a consignação de IRS?</h2>

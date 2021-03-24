@@ -3,8 +3,8 @@
   "theme_color": "#77b255",
   "background_color": "#77b255",
   "display": "browser",
-  "Scope": "/",
-  "start_url": "/",
+  "scope": "/",
+  "start_url": "https://clinis.github.io/irs-solidario/",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
