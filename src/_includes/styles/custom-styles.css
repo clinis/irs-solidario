@@ -159,4 +159,6 @@ blockquote footer:before {
 
 details {
     font-size: var(--text-sm);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-xs);
 }
