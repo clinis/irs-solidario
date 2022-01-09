@@ -1,0 +1,66 @@
+---
+pagination:
+  data: xls.data
+  size: 1
+  alias: associacao
+permalink: "/{{ associacao.nif }}/index.html"
+---
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <title>{{ associacao.nome }}</title>
+  <meta name="title" content="{{ associacao.nome }}">
+
+  <!-- capture the CSS content as a Nunjucks variable -->
+  {%- set css %}
+    {% include "styles/custom-styles.css" %}
+  {% endset %}
+  <!-- feed it through cssmin filter to minify -->
+  <style>
+    {{ css | cssmin | safe }}
+  </style>
+
+</head>
+<body>
+  {% set localidadeUrl = "/?q=" + associacao.localidade + "#lista" %}
+  <main>
+
+    <a href="{{ "/#lista" | url }}"> < Ver lista de associações</a>
+
+    <h1>{{ associacao.nome }}</h1>
+
+    <dl>
+      <dt>NIF:</dt>
+      <dd>{{ associacao.nif }}</dd>
+
+      <dt>Localidade:</dt>
+      <dd>{{ associacao.localidade }} <a href="{{ localidadeUrl | url }}">(procurar mais associações nesta localidade 🔎)</a></dd>
+    </dl>
+
+    <a href="https://google.com/search?q={{ associacao.nif }}">Procurar NIF <em>{{ associacao.nif }}</em> na internet 🔎</a>
+
+    <button id="shareBtn">Partilhar</button>
+
+  </main>
+
+  <script>
+
+  const shareButton = document.getElementById("shareBtn");
+  shareButton.addEventListener('click', event => {
+  if (navigator.share) {
+    navigator.share({
+      title: "{{ associacao.nome }} ({{ associacao.nif }})",
+      url: new URL(window.location.href),
+      text: "Consignar IRS à associação {{ associacao.nome }}, com NIF {{ associacao.nif }}, em {{ associacao.localidade }}."
+    }).then(() => {
+      console.log('Thanks for sharing!');
+    })
+    .catch(console.error);
+  } else {
+    console.log("Noooo sharing")
+  }
+  });
+  </script>
+</body>
+</html>
