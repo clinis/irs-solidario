@@ -82,11 +82,11 @@
         </thead>
 
         <tbody>
-        {% for line in xls.data -%}
+        {% for associacao in xls.data -%}
         <tr>
-          <td>{{ line[2] }}</td>
-          <td>{{ line[1] }}</td>
-          <td>{{ line[0] }}</td>
+          <td>{{ associacao.localidade }}</td>
+          <td>{{ associacao.nome }}</td>
+          <td>{{ associacao.nif }}</td>
         </tr>
         {%- endfor%}
         </tbody>
