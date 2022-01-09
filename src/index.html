@@ -115,6 +115,7 @@
 
   <!-- Simple Datatables init code -->
   <script>
+    // Initialize the Datatable, with options
     const table = new simpleDatatables.DataTable("#table-associacoes", {
       columns: [
         { select: 0, sort: "asc" },
@@ -132,6 +133,37 @@
         noRows: "Nenhum resultado encontrado.",
       }
     })
+
+    // Add event listners and URL search params after Datatable init
+    table.on('datatable.init', function(){
+      // Get search input element
+      const searchInputElement = document.getElementsByClassName("dataTable-input")[0];
+
+      // Improve search input element
+      // Turn it into input type search (gives clear button in some browsers)
+      searchInputElement.type = "search";
+      // Prevent "enter" key from clearing input
+      searchInputElement.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+        }
+      });
+      // When clearing the search input, clear search in Datatable
+      searchInputElement.addEventListener('search', function(event) {
+        table.search(query='')
+      });
+
+      // Search from query params
+      // Get search query from URL params
+      const urlParams = new URLSearchParams(window.location.search);
+      let query = urlParams.get('q');
+      // If any query, update search input value and search Datatable
+      if (query) {
+        searchInputElement.value = query;
+        table.search(query=query);
+      }
+    })
+
   </script>
 </body>
 
