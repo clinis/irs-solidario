@@ -1,4 +1,4 @@
-const xlsx = require('async-xlsx');
+const xlsx = require('node-xlsx').default;;
 
 module.exports = function() {
   // Parse XLSX into JSON
@@ -6,7 +6,7 @@ module.exports = function() {
 
   // Trim irrelevant data
   let parsedData = xlsxJson[0]['data']
-  parsedData.splice(0, 4);  // strip title lines AND header line
+  parsedData.splice(0, 6);  // strip title lines AND header line
 
   // Return data as an array of ojects
   return {
