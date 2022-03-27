@@ -34,7 +34,9 @@
   {% include "styles/custom-styles.css" %}
   </style>
 
+  <script defer src="./simple-datatables-script.js" type="text/javascript"></script>
 </head>
+
 <body>
   <main>
     <h1>{{ metadata.title }}</h1>
@@ -67,7 +69,7 @@
 
     <div id="table-wrapper"></div>
     <div class="table-container">
-      <table id="table-associacoes">
+      <table id="table-associacoes" style="table-layout: fixed">
         <thead>
           <tr>
             <th>Localidade</th>
@@ -92,73 +94,72 @@
       </table>
     </div>
 
+    <p class="small">Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão.</p>
+
     <details>
       <summary>
         <small>Sobre estes dados</small>
       </summary>
       <p>Esta lista está datada de 25/03/2021 e foi <a href="https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/IRS/Documents/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2020.xlsx" target="_blank" rel="noreferrer">obtida do Portal das Finanças</a> em 04/04/2021.</p>
 
-      <p>Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão.</p>
-
       <p>O código-fonte deste site pode ser <a href="https://github.com/clinis/irs-solidario" target="_blank" rel="noreferrer">consultado no GitHub.</a></p>
     </details>
 
   </main>
 
-  <!-- Simple Datatables -->
-  <script src="./simple-datatables-scripts.js"></script>
-
-  <!-- Simple Datatables init code -->
   <script>
-    // Initialize the Datatable, with options
-    const table = new simpleDatatables.DataTable("#table-associacoes", {
-      columns: [
-        { select: 0, sort: "asc" },
-        { select: 3, sortable: false },
-      ],
-      searchable: true,
-      layout: {
-        top: "{search}",
-        bottom: "{pager}{info}{select}"
-      },
-      labels: {
-        info: "{start} a {end} de {rows} resultados",
-        placeholder: "Procurar nome ou localidade ou NIF",
-        perPage: "Mostrar {select} resultados",
-        noRows: "Nenhum resultado encontrado.",
-      }
-    })
+    document.addEventListener('DOMContentLoaded', function(){
+      // Auto size table based on content
+      document.getElementById("table-associacoes").style.tableLayout = "auto";
 
-    // Add event listners and URL search params after Datatable init
-    table.on('datatable.init', function(){
-      // Get search input element
-      const searchInputElement = document.getElementsByClassName("dataTable-input")[0];
-
-      // Improve search input element
-      // Turn it into input type search (gives clear button in some browsers)
-      searchInputElement.type = "search";
-      // Prevent "enter" key from clearing input
-      searchInputElement.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-          event.preventDefault();
+      // Initialize the Datatable, with options
+      const table = new simpleDatatables.DataTable("#table-associacoes", {
+        columns: [
+          { select: 0, sort: "asc" },
+          { select: 3, sortable: false },
+        ],
+        searchable: true,
+        layout: {
+          top: "{search}",
+          bottom: "{pager}{info}{select}"
+        },
+        labels: {
+          info: "{start} a {end} de {rows} resultados",
+          placeholder: "Procurar nome ou localidade ou NIF",
+          perPage: "Mostrar {select} resultados",
+          noRows: "Nenhum resultado encontrado.",
         }
-      });
-      // When clearing the search input, clear search in Datatable
-      searchInputElement.addEventListener('search', function(event) {
-        table.search(query='')
-      });
+      })
 
-      // Search from query params
-      // Get search query from URL params
-      const urlParams = new URLSearchParams(window.location.search);
-      let query = urlParams.get('q');
-      // If any query, update search input value and search Datatable
-      if (query) {
-        searchInputElement.value = query;
-        table.search(query=query);
-      }
-    })
+      // Add event listners and URL search params after Datatable init
+      table.on('datatable.init', function(){
+        // Get search input element
+        const searchInputElement = document.getElementsByClassName("dataTable-input")[0];
 
+        // Improve search input element
+        // Turn it into input type search (gives clear button in some browsers)
+        searchInputElement.type = "search";
+        // Prevent "enter" key from clearing input
+        searchInputElement.addEventListener("keypress", function(event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+          }
+        });
+        // When clearing the search input, clear search in Datatable
+        searchInputElement.addEventListener('search', function(event) {
+          table.search(query='')
+        });
+
+        // Get search query from URL query params
+        const urlParams = new URLSearchParams(window.location.search);
+        let query = urlParams.get('q');
+        // If any query, update search input value and search Datatable
+        if (query) {
+          searchInputElement.value = query;
+          table.search(query=query);
+        }
+      })
+    });
   </script>
 </body>
 
