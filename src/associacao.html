@@ -9,58 +9,93 @@ permalink: "/{{ associacao.nif }}/index.html"
 <html lang="pt">
 
 <head>
-  <title>{{ associacao.nome }}</title>
-  <meta name="title" content="{{ associacao.nome }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- capture the CSS content as a Nunjucks variable -->
-  {%- set css %}
-    {% include "styles/custom-styles.css" %}
-  {% endset %}
-  <!-- feed it through cssmin filter to minify -->
+  <!-- Primary Meta Tags -->
+  <title>{{ associacao.nome }} - {{ metadata.title }}</title>
+  <meta name="title" content="{{ associacao.nome }} - {{ metadata.title }}">
+  <meta name="description" content="Consignar IRS à associação {{ associacao.nome }}, com NIF {{ associacao.nif }}, em {{ associacao.localidade }}.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ metadata.url }}">
+  <meta property="og:title" content="{{ associacao.nome }} - {{ metadata.title }}">
+  <meta property="og:description" content="Consignar IRS à associação {{ associacao.nome }}, com NIF {{ associacao.nif }}, em {{ associacao.localidade }}.">
+  <meta property="og:image" content="{{ metadata.url }}image.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ metadata.url }}">
+  <meta property="twitter:title" content="{{ associacao.nome }} - {{ metadata.title }}">
+  <meta property="twitter:description" content="Consignar IRS à associação {{ associacao.nome }}, com NIF {{ associacao.nif }}, em {{ associacao.localidade }}.">
+  <meta property="twitter:image" content="{{ metadata.url }}image.png">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | url }}">
+  <link rel="manifest" href="{{ '/manifest.json' | url }}">
+
   <style>
-    {{ css | cssmin | safe }}
+  {% include "styles/custom-styles.css" %}
   </style>
 
 </head>
+
 <body>
   {% set localidadeUrl = "/?q=" + associacao.localidade + "#lista" %}
   <main>
 
-    <a href="{{ "/#lista" | url }}"> < Ver lista de associações</a>
+    <h1 class="mb-0">{{ metadata.title }}</h1>
+    <a href="{{ "/#lista" | url }}" class="small"> &larr; ver lista de associações</a>
 
-    <h1>{{ associacao.nome }}</h1>
+    <h2>{{ associacao.nome }}</h2>
 
     <dl>
       <dt>NIF:</dt>
       <dd>{{ associacao.nif }}</dd>
 
       <dt>Localidade:</dt>
-      <dd>{{ associacao.localidade }} <a href="{{ localidadeUrl | url }}">(procurar mais associações nesta localidade 🔎)</a></dd>
+      <dd>
+        <a href="{{ localidadeUrl | url }}">{{ associacao.localidade }} 🔎</a>
+      </dd>
     </dl>
 
-    <a href="https://google.com/search?q={{ associacao.nif }}">Procurar NIF <em>{{ associacao.nif }}</em> na internet 🔎</a>
+    <div>
+      <button id="copyBtn">Copiar NIF</button>
+      <button id="shareBtn" disabled="disabled">Partilhar</button>
+    <div>
 
-    <button id="shareBtn">Partilhar</button>
+    <p class="small mt-5">
+      Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão. <a href="https://google.com/search?q={{ associacao.nif }}">Procurar NIF <em>{{ associacao.nif }}</em> na internet 🔎</a>
+    </p>
 
   </main>
 
   <script>
+    const copyButton = document.getElementById("copyBtn");
+    const shareButton = document.getElementById("shareBtn");
 
-  const shareButton = document.getElementById("shareBtn");
-  shareButton.addEventListener('click', event => {
-  if (navigator.share) {
-    navigator.share({
-      title: "{{ associacao.nome }} ({{ associacao.nif }})",
-      url: new URL(window.location.href),
-      text: "Consignar IRS à associação {{ associacao.nome }}, com NIF {{ associacao.nif }}, em {{ associacao.localidade }}."
-    }).then(() => {
-      console.log('Thanks for sharing!');
-    })
-    .catch(console.error);
-  } else {
-    console.log("Noooo sharing")
-  }
-  });
+    copyButton.addEventListener('click', event => {
+      navigator.clipboard.writeText("{{ associacao.nif }}").then(() => {
+        alert("NIF copiado");
+      });
+    });
+
+    if (navigator.share) {
+      shareButton.disabled = false;
+
+      shareButton.addEventListener('click', event => {
+        navigator.share({
+          title: "{{ associacao.nome }} ({{ associacao.nif }})",
+          url: new URL(window.location.href),
+          text: "Consignar IRS à associação {{ associacao.nome }}, com NIF {{ associacao.nif }}, em {{ associacao.localidade }}."
+        }).then(() => {
+          console.log('Thanks for sharing!');
+        })
+        .catch(console.error);
+      });
+    };
   </script>
 </body>
 </html>
