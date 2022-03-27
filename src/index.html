@@ -29,14 +29,9 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | url }}">
   <link rel="manifest" href="{{ '/manifest.json' | url }}">
 
-  <!-- capture the CSS content as a Nunjucks variable -->
-  {%- set css %}
-    {% include "styles/custom-simple-datatables-styles.css" %}
-    {% include "styles/custom-styles.css" %}
-  {% endset %}
-  <!-- feed it through cssmin filter to minify -->
   <style>
-    {{ css | cssmin | safe }}
+  {% include "styles/custom-simple-datatables-styles.css" %}
+  {% include "styles/custom-styles.css" %}
   </style>
 
 </head>
