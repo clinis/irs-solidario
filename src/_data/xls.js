@@ -2,7 +2,7 @@ const xlsx = require('node-xlsx').default;;
 
 module.exports = function() {
   // Parse XLSX into JSON
-  let xlsxJson = xlsx.parse(__dirname + '/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2020.xlsx')
+  let xlsxJson = xlsx.parse(__dirname + '/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2021.xlsx')
 
   // Trim irrelevant data
   let parsedData = xlsxJson[0]['data']

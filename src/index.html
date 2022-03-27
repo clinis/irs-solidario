@@ -40,7 +40,7 @@
 <body>
   <main>
     <h1>{{ metadata.title }}</h1>
-    <p>Nesta página é possível <a href="#lista">ver e procurar</a>, de forma prática, as entidades elegívies a consignação de IRS do ano fiscal 2020.</p>
+    <p>Nesta página é possível <a href="#lista">ver e procurar</a>, de forma prática, as entidades elegívies a consignação de IRS do ano fiscal {{ metadata.fiscalYear }}.</p>
 
     <h2>O que é a consignação de IRS?</h2>
     <blockquote>
@@ -62,7 +62,7 @@
       <p>(...) a consignação de IRS corresponde a <b>0,5%</b> da totalidade dos seus rendimentos depois de deduzidas as despesas suportadas com saúde, educação, imóveis, lares e outras despesas que a lei prevê que podem ser abatidas no IRS.</p>
       <footer>in <cite title="Economias.pt"><a href="https://www.economias.pt/consignacao-irs/" target="_blank" rel="noreferrer">Economias</a></cite></footer>
     </blockquote>
-    <p>Imaginemos que, relativamente ao IRS do ano fiscal de 2020, foi alvo de retenções na fonte no valor de € 6000. Ao entregar o IRS em 2021, depois de consideradas as deduções, o valor de imposto liquidado é € 5000. O Estado tem de lhe devolver € 1000.<p>
+    <p>Imaginemos que, relativamente ao IRS do ano fiscal de {{ metadata.fiscalYear }}, foi alvo de retenções na fonte no valor de € 6000. Ao entregar o IRS em {{ metadata.fiscalYear + 1 }}, depois de consideradas as deduções, o valor de imposto liquidado é € 5000. O Estado tem de lhe devolver € 1000.<p>
     <p>A consignação de IRS calcula-se multiplicando o imposto liquidado (€ 5000) por 0,5%. Neste caso a consignação de IRS seria € 25, recebidos pela instituição; o Estado arrecadará a diferença entre o IRS liquidado e a consignação, ficando apenas com € 4975.</p>
 
     <h2 id="lista">Lista de Associações</h2>
@@ -100,7 +100,7 @@
       <summary>
         <small>Sobre estes dados</small>
       </summary>
-      <p>Esta lista está datada de 25/03/2021 e foi <a href="https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/IRS/Documents/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2020.xlsx" target="_blank" rel="noreferrer">obtida do Portal das Finanças</a> em 04/04/2021.</p>
+      <p>Esta lista está datada de 15/03/2022 e foi <a href="https://info.portaldasfinancas.gov.pt/pt/apoio_contribuinte/IRS/Documents/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2021.xlsx" target="_blank" rel="noreferrer">obtida do Portal das Finanças</a> em 28/03/2022.</p>
 
       <p>O código-fonte deste site pode ser <a href="https://github.com/clinis/irs-solidario" target="_blank" rel="noreferrer">consultado no GitHub.</a></p>
     </details>
