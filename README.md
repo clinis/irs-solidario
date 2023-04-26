@@ -1,4 +1,4 @@
-# IRS Solidário (ano fiscal 2021)
+# IRS Solidário (ano fiscal 2022)
 
 Este projeto é uma simples página web que lista, numa tabela, todas as entidades autorizadas a beneficiar da consignação de IRS.
 
