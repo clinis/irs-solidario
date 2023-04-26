@@ -31,10 +31,10 @@ permalink: "/{{ associacao.nif }}/index.html"
   <meta property="twitter:description" content="Consignar IRS à associação {{ associacao.nome }}, com NIF {{ associacao.nif }}, em {{ associacao.localidade }}.">
   <meta property="twitter:image" content="{{ metadata.url }}image.png">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | url }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' | url }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' | url }}">
-  <link rel="manifest" href="{{ '/manifest.json' | url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/favicon-32x32.png' }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' }}">
+  <link rel="manifest" href="{{ '/manifest.json' }}">
 
   <style>
   {% include "styles/custom-styles.css" %}
@@ -47,7 +47,7 @@ permalink: "/{{ associacao.nif }}/index.html"
   <main>
 
     <h1 class="mb-0">{{ metadata.title }}</h1>
-    <a href="{{ "/#lista" | url }}" class="small"> &larr; ver lista de associações</a>
+    <a href="{{ "/#lista" }}" class="small"> &larr; ver lista de associações</a>
 
     <h2>{{ associacao.nome }}</h2>
 
@@ -57,7 +57,7 @@ permalink: "/{{ associacao.nif }}/index.html"
 
       <dt>Localidade:</dt>
       <dd>
-        <a href="{{ localidadeUrl | url }}">{{ associacao.localidade }} 🔎</a>
+        <a href="{{ localidadeUrl }}">{{ associacao.localidade }} 🔎</a>
       </dd>
     </dl>
 
@@ -67,7 +67,7 @@ permalink: "/{{ associacao.nif }}/index.html"
     <div>
 
     <p class="small mt-5">
-      Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão. <a href="https://google.com/search?q={{ associacao.nif }}">Procurar NIF <em>{{ associacao.nif }}</em> na internet 🔎</a>
+      Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão. <a href="https://google.com/search?q={{ associacao.nif }}" target="_blank" rel="noreferrer">Procurar NIF <em>{{ associacao.nif }}</em> na internet 🔎</a>
     </p>
 
   </main>

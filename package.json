@@ -1,6 +1,6 @@
 {
   "name": "irs-solidario",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Lista de de entidades autorizadas a beneficiar da consignação de IRS em 2022",
   "author": "clinis",
   "license": "ISC",
@@ -13,14 +13,15 @@
     "simple-datatables": "^3.2.0"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy": "^2.0.1",
     "cross-env": "^7.0.0",
-    "cssnano": "^5.1.5",
+    "cssnano": "^6.0.0",
     "del-cli": "^4.0.1",
-    "gh-pages": "^3.1.0",
-    "htmlnano": "^2.0.0",
+    "gh-pages": "^5.0.0",
+    "htmlnano": "^2.0.4",
     "node-xlsx": "^0.21.0",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "terser": "^5.17.1"
   },
   "scripts": {
     "eleventy:dev": "cross-env ELEVENTY_ENV=development eleventy --serve --incremental",

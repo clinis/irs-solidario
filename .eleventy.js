@@ -1,6 +1,10 @@
 const htmlnano = require('htmlnano')
 
+const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+
+
 module.exports = function(eleventyConfig) {
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 
   // site is not on root of domain. because github pages
   const pathPrefix = "/irs-solidario/";
