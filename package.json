@@ -4,6 +4,7 @@
   "description": "Lista de de entidades autorizadas a beneficiar da consignação de IRS em 2022",
   "author": "clinis",
   "license": "ISC",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git://github.com/clinis/irs-solidario.git"
@@ -13,6 +14,7 @@
     "simple-datatables": "^3.2.0"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
     "cross-env": "^7.0.3",
     "cssnano": "^7.0.6",
     "del-cli": "^6.0.0",

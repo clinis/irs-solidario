@@ -1,13 +1,8 @@
-const htmlnano = require('htmlnano')
+import { EleventyHtmlBasePlugin } from '@11ty/eleventy';
+import htmlnano from 'htmlnano';
 
-const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
-
-
-module.exports = function(eleventyConfig) {
+export default async function(eleventyConfig) {
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
-
-  // site is not on root of domain. because github pages
-  const pathPrefix = "/irs-solidario/";
 
   // copy favicon files to site root
   eleventyConfig.addPassthroughCopy({ "./src/favicon": "/" });
@@ -36,13 +31,14 @@ module.exports = function(eleventyConfig) {
     }
     return content;
   });
-
-  return {
-    dir: {
-      input: './src',
-      output: './dist'
-    },
-    pathPrefix: pathPrefix,
-    htmlTemplateEngine: "njk"
-  }
 }
+
+export const config = {
+  dir: {
+    input: './src',
+    output: './dist'
+  },
+  htmlTemplateEngine: 'njk',
+  // Deploy to a subdirectory (e.g.: /dev/test). Is the case on GitHub pages. If on root, leave blank ("")
+  pathPrefix: '/irs-solidario/',
+};

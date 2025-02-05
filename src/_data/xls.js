@@ -1,7 +1,10 @@
-const xlsx = require('node-xlsx').default;;
+import path from 'path';
+import { fileURLToPath } from 'url';
+import xlsx from 'node-xlsx';
 
-module.exports = function() {
+export default function () {
   // Parse XLSX into JSON
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
   let xlsxJson = xlsx.parse(__dirname + '/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2022.xlsx')
 
   // Trim irrelevant data
