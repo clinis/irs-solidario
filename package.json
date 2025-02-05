@@ -1,6 +1,6 @@
 {
   "name": "irs-solidario",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "description": "Lista de de entidades autorizadas a beneficiar da consignação de IRS em 2022",
   "author": "clinis",
   "license": "ISC",
@@ -13,26 +13,23 @@
     "simple-datatables": "^3.2.0"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
-    "cross-env": "^7.0.0",
-    "cssnano": "^6.0.0",
-    "del-cli": "^4.0.1",
-    "gh-pages": "^5.0.0",
-    "htmlnano": "^2.0.4",
-    "node-xlsx": "^0.21.0",
-    "npm-run-all": "^4.1.5",
-    "terser": "^5.17.1"
+    "cross-env": "^7.0.3",
+    "cssnano": "^7.0.6",
+    "del-cli": "^6.0.0",
+    "gh-pages": "^6.3.0",
+    "htmlnano": "^2.1.1",
+    "node-xlsx": "^0.24.0"
   },
   "scripts": {
     "eleventy:dev": "cross-env ELEVENTY_ENV=development eleventy --serve --incremental",
     "eleventy:prod": "cross-env ELEVENTY_ENV=production eleventy --serve",
     "eleventy:build": "cross-env ELEVENTY_ENV=production eleventy",
     "clean": "del-cli dist",
-    "build": "run-s clean eleventy:build",
+    "build": "npm run clean && npm run eleventy:build",
     "prod": "npm run eleventy:prod",
     "dev": "npm run eleventy:dev",
-    "start": "run-s clean eleventy:dev",
+    "start": "npm run clean && npm run eleventy:dev",
     "deploy:ghpages": "npx gh-pages -d dist",
-    "deploy": "run-s build deploy:ghpages"
+    "deploy": "npm run build && npm run deploy:ghpages"
   }
 }
