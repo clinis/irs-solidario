@@ -1,5 +1,5 @@
 :root {
-
+    
     /* colors */
     --color-primary: #296603;
     --color-primary-dark: #193e02;
@@ -11,6 +11,7 @@
     --gray-3: #bbbbbc;
     --gray-2: #d1d0d2;
     --gray-1: #e8e7e8;
+    accent-color: var(--color-primary);
 
     /* set base values */
     --text-base-size: 1em;
@@ -163,6 +164,6 @@ dd {
 }
 
 
-button:disabled, button[disabled] {
-  visibility: hidden;
-}
+.share-buttons button:disabled, .share-buttons button[disabled] {
+    visibility: hidden;
+  }

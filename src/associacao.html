@@ -58,17 +58,18 @@ permalink: "/{{ associacao.nif }}/index.html"
 
       <dt>Localidade:</dt>
       <dd>
-        <a href="{{ localidadeUrl }}">{{ associacao.localidade }} 🔎</a>
+        <a href="{{ localidadeUrl }}">{{ associacao.localidade }} 📍</a>
       </dd>
     </dl>
 
-    <div>
+    <div class="share-buttons">
       <button id="copyBtn">Copiar NIF</button>
       <button id="shareBtn" disabled="disabled">Partilhar</button>
     <div>
 
     <p class="small mt-5">
-      Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão. <a href="https://google.com/search?q={{ associacao.nif }}" target="_blank" rel="noreferrer">Procurar NIF <em>{{ associacao.nif }}</em> na internet 🔎</a>
+      Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão.<br/>
+      <a href="https://google.com/search?q={{ associacao.nif }}" target="_blank" rel="noreferrer">Procurar NIF <em>{{ associacao.nif }}</em> na internet 🔎</a>
     </p>
 
   </main>
@@ -79,7 +80,7 @@ permalink: "/{{ associacao.nif }}/index.html"
 
     copyButton.addEventListener('click', event => {
       navigator.clipboard.writeText("{{ associacao.nif }}").then(() => {
-        alert("NIF copiado");
+        copyButton.innerText = "NIF copiado!";
       });
     });
 
