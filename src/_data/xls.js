@@ -5,7 +5,7 @@ import xlsx from 'node-xlsx';
 export default function () {
   // Parse XLSX into JSON
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
-  let xlsxJson = xlsx.parse(__dirname + '/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2022.xlsx')
+  let xlsxJson = xlsx.parse(__dirname + '/Listagem_entidades_autorizadas_a_beneficiar_da_consignacao_2024.xlsx')
 
   // Trim irrelevant data
   let parsedData = xlsxJson[0]['data']
