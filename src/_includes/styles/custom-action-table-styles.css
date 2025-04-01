@@ -1,0 +1,71 @@
+action-table {
+    --highlight: var(--color-link-hover);
+	--focus: unset;
+	--border: 1px solid var(--gray-2);
+    --border-radius: 0.2em;
+	--th-bg: var(--gray-1);
+	--th-sorted: var(--gray-2);
+	--col-sorted: unset;
+	--td-options-bg: var(--gray-1);
+	--page-btn: var(--gray-1);
+	--page-btn-active: var(--color-link);
+}
+action-table table {
+    display: table;
+}
+action-table .selected {
+    background-color: unset;
+}
+
+.table-wrapper {
+    overflow-y: auto;
+    /* Responsive scroll shadow gradient. Code from https://adrianroselli.com/2020/11/under-engineered-responsive-tables.html */
+	background: var(--responsive-scroll-gradient);
+	background-repeat: no-repeat;
+	background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+	background-position: 0 0, 100%, 0 0, 100%;
+	background-attachment: local, local, scroll, scroll;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: var(--text-sm);
+}
+table thead th, table tbody td {
+    border: none;
+    /* padding: var(--space-xs); */
+}
+table tbody tr {
+    border-bottom: 1px solid var(--gray-1);
+}
+table tbody tr:hover {
+    background-color: #ecf3e9;
+}
+table tr td.number {
+    font-variant-numeric: tabular-nums;
+}
+
+.no-results {
+    font-size: var(--text-sm);
+    text-align: center;
+    padding: var(--space-lg) 0;
+}
+
+.action-table-footer {
+    font-size: var(--text-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+fieldset {
+    border: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+fieldset input[type="search"] {
+    flex-grow: 1;
+}

@@ -30,12 +30,13 @@
   <link rel="icon" type="image/png" sizes="16x16" href="{{ '/favicon-16x16.png' }}">
   <link rel="manifest" href="{{ '/manifest.json' }}">
 
-  <style>
-  {% include "styles/custom-simple-datatables-styles.css" %}
-  {% include "styles/custom-styles.css" %}
-  </style>
+  <script type="module" src="/js/action-table/index.js"></script>
+  <link rel="stylesheet" href="/action-table.css" />
 
-  <script defer src="./simple-datatables-script.js" type="text/javascript"></script>
+  <style>
+    {% include "styles/custom-styles.css" %}
+    {% include "styles/custom-action-table-styles.css" %}
+  </style>
 </head>
 
 <body>
@@ -68,32 +69,54 @@
 
     <h2 id="lista">Lista de Associações</h2>
 
-    <div id="table-wrapper"></div>
-    <div class="table-container">
-      <table id="table-associacoes" style="table-layout: fixed">
-        <thead>
+    <action-table id="table-associacoes" pagination="10" sort="Localidade" urlparams store>
+
+      <action-table-filters>
+        <fieldset>
+          <input id="action-table-search" name="action-table" type="search" placeholder="nome ou localidade ou NIF" />
+          <button type="reset" disabled>Limpar</button>
+        </fieldset>
+      </action-table-filters>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Localidade</th>
+              <th>Nome</th>
+              <th>NIF</th>
+              <th no-sort></th>
+            </tr>
+          </thead>
+        
+
+          <tbody>
+          {% for associacao in xls.data -%}
           <tr>
-            <th>Localidade</th>
-            <th>Nome</th>
-            <th>NIF</th>
-            <th> </th>
+            <td>{{ associacao.localidade }}</td>
+            <td>{{ associacao.nome }}</td>
+            <td class="number">{{ associacao.nif }}</td>
+            {% set nifUrl = "/" + associacao.nif + "/" %}
+            <td><a href="{{ nifUrl }}">🔗</a></td>
           </tr>
-        </thead>
+          {%- endfor%}
+          </tbody>
 
-        <tbody>
-        {% for associacao in xls.data -%}
-        <tr>
-          <td>{{ associacao.localidade }}</td>
-          <td>{{ associacao.nome }}</td>
-          <td>{{ associacao.nif }}</td>
-          {% set nifUrl = "/" + associacao.nif + "/" %}
-          <td><a href="{{ nifUrl }}">🔗</a></td>
-        </tr>
-        {%- endfor%}
-        </tbody>
+        </table>
+      </div>
 
-      </table>
-    </div>
+      <action-table-no-results>
+        <div class="no-results">
+          <em>Nenhum resultado encontrado</em>
+          <button type="reset">Limpar filtros</button>
+        </div>
+      </action-table-no-results>
+
+      <div class="action-table-footer">
+        <action-table-pagination label="A mostrar {rows} de {total} items"></action-table-pagination>
+        <action-table-pagination-options options="5,10,15,25,50" label="Mostar"></action-table-pagination-options>
+      </div>
+    </action-table>
 
     <p class="small">Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão.</p>
 
@@ -107,61 +130,6 @@
     </details>
 
   </main>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      // Auto size table based on content
-      document.getElementById("table-associacoes").style.tableLayout = "auto";
-
-      // Initialize the Datatable, with options
-      const table = new simpleDatatables.DataTable("#table-associacoes", {
-        columns: [
-          { select: 0, sort: "asc" },
-          { select: 3, sortable: false },
-        ],
-        searchable: true,
-        layout: {
-          top: "{search}",
-          bottom: "{pager}{info}{select}"
-        },
-        labels: {
-          info: "{start} a {end} de {rows} resultados",
-          placeholder: "Procurar nome ou localidade ou NIF",
-          perPage: "Mostrar {select} resultados",
-          noRows: "Nenhum resultado encontrado.",
-        }
-      })
-
-      // Add event listners and URL search params after Datatable init
-      table.on('datatable.init', function(){
-        // Get search input element
-        const searchInputElement = document.getElementsByClassName("dataTable-input")[0];
-
-        // Improve search input element
-        // Turn it into input type search (gives clear button in some browsers)
-        searchInputElement.type = "search";
-        // Prevent "enter" key from clearing input
-        searchInputElement.addEventListener("keypress", function(event) {
-          if (event.key === "Enter") {
-            event.preventDefault();
-          }
-        });
-        // When clearing the search input, clear search in Datatable
-        searchInputElement.addEventListener('search', function(event) {
-          table.search(query='')
-        });
-
-        // Get search query from URL query params
-        const urlParams = new URLSearchParams(window.location.search);
-        let query = urlParams.get('q');
-        // If any query, update search input value and search Datatable
-        if (query) {
-          searchInputElement.value = query;
-          table.search(query=query);
-        }
-      })
-    });
-  </script>
 </body>
 
 </html>

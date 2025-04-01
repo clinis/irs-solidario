@@ -48,6 +48,10 @@
     --color-blockquote-border: var(--gray-2);
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: var(--font-primary);
     font-size: var(--text-md);
@@ -111,23 +115,8 @@ a:hover, a:focus {
     color: var(--color-link-hover);
 }
 
-
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-table thead {
-    background-color: var(--gray-1);
-}
-table tbody tr:not(:last-child) {
-     border-bottom: 1px solid var(--gray-1)
- }
-table tbody tr:hover {
-    background-color: #ecf3e9;
-}
-table tr td:last-of-type {
-    font-variant-numeric: tabular-nums;
+button {
+    padding: var(--space-xs);
 }
 
 blockquote {
@@ -149,7 +138,6 @@ details {
     margin-bottom: var(--space-xs);
 }
 
-
 dl {
     display: flex;
     flex-flow: row wrap;
@@ -166,13 +154,12 @@ dd {
     padding: 0;
 }
 
-
 .mb-0 {
-  margin-bottom: 0
+    margin-bottom: 0
 }
 
 .mt-5 {
-  margin-top: var(--space-xl);
+    margin-top: var(--space-xl);
 }
 
 

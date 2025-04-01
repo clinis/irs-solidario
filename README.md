@@ -14,7 +14,7 @@ Listando os dados numa simples tabela numa página web, o acesso aos dados é co
 
 Os ficheiros originais de dados estão arquivados na pasta `src/_data/`. O ficheiro `src/_data/xls.js` é onde é feita a extração dos dados.
 
-Este projeto usa o gerador de sites estáticos [Eleventy](https://www.11ty.dev/) para construir o ficheiro HTML. Para reduzir o tamanho da página, o código CSS e HTML é minificado (ver ficheiro `.eleventy.js`). A página incorpora [Javascript](https://github.com/fiduswriter/Simple-DataTables) para melhorar a experiência de vizualização da tabela.
+Este projeto usa o gerador de sites estáticos [Eleventy](https://www.11ty.dev/) para construir o ficheiro HTML. Para reduzir o tamanho da página, o código CSS e HTML é minificado (ver ficheiro `.eleventy.js`). A página incorpora [um Web Component](https://github.com/colinaut/action-table) para melhorar a experiência de vizualização da tabela.
 
 Para correr este projeto localmente, são utilizados os seguintes comandos:
 

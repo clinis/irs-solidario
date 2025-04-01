@@ -7,8 +7,11 @@ export default async function(eleventyConfig) {
   // copy favicon files to site root
   eleventyConfig.addPassthroughCopy({ "./src/favicon": "/" });
 
-  // copy Simple Datatables javascript file to site root
-  eleventyConfig.addPassthroughCopy({ "node_modules/simple-datatables/dist/umd/simple-datatables.js": "/simple-datatables-script.js" });
+  // copy action-table files to site root
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/@colinaut/action-table/dist/*.js": "js/action-table",
+    "node_modules/@colinaut/action-table/dist/action-table.css": "action-table.css",
+})
 
   // Set watch targets for CSS changes
   eleventyConfig.addWatchTarget('**/*.css')
