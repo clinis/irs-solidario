@@ -15,10 +15,10 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
-    "cssnano": "^7.0.6",
-    "del-cli": "^6.0.0",
+    "cssnano": "^7.1.5",
+    "del-cli": "^7.0.0",
     "gh-pages": "^6.3.0",
-    "htmlnano": "^2.1.1",
+    "htmlnano": "^3.2.0",
     "node-xlsx": "^0.24.0"
   },
   "scripts": {
