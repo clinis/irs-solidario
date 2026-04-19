@@ -1,4 +1,4 @@
-# IRS Solidário (ano fiscal 2024)
+# IRS Solidário (ano fiscal 2025)
 
 Este projeto é uma simples página web que lista, numa tabela, todas as entidades autorizadas a beneficiar da consignação de IRS.
 
