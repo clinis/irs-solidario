@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
-    "cross-env": "^7.0.3",
     "cssnano": "^7.0.6",
     "del-cli": "^6.0.0",
     "gh-pages": "^6.3.0",
@@ -23,9 +22,9 @@
     "node-xlsx": "^0.24.0"
   },
   "scripts": {
-    "eleventy:dev": "cross-env ELEVENTY_ENV=development eleventy --serve --incremental",
-    "eleventy:prod": "cross-env ELEVENTY_ENV=production eleventy --serve",
-    "eleventy:build": "cross-env ELEVENTY_ENV=production eleventy",
+    "eleventy:dev": "ELEVENTY_ENV=development eleventy --serve --incremental",
+    "eleventy:prod": "ELEVENTY_ENV=production eleventy --serve",
+    "eleventy:build": "ELEVENTY_ENV=production eleventy",
     "clean": "del-cli dist",
     "build": "npm run clean && npm run eleventy:build",
     "prod": "npm run eleventy:prod",
