@@ -58,7 +58,9 @@ permalink: "/{{ associacao.nif }}/index.html"
 
       <dt>Localidade:</dt>
       <dd>
+        {% if associacao.localidade %}
         <a href="{{ localidadeUrl }}">{{ associacao.localidade }} 📍</a>
+        {% endif %}
       </dd>
     </dl>
 
