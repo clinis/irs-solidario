@@ -162,8 +162,3 @@ dd {
 .mt-5 {
     margin-top: var(--space-xl);
 }
-
-
-.share-buttons button:disabled, .share-buttons button[disabled] {
-    visibility: hidden;
-  }

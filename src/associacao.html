@@ -62,10 +62,9 @@ permalink: "/{{ associacao.nif }}/index.html"
       </dd>
     </dl>
 
-    <div class="share-buttons">
+    <div id="action-buttons-container">
       <button id="copyBtn">Copiar NIF</button>
-      <button id="shareBtn" disabled="disabled">Partilhar</button>
-    <div>
+    </div>
 
     <p class="small mt-5">
       Antes de utilizar estes dados deve sempre confirmar se o NIF corresponde à entidade em questão.<br/>
@@ -76,7 +75,6 @@ permalink: "/{{ associacao.nif }}/index.html"
 
   <script>
     const copyButton = document.getElementById("copyBtn");
-    const shareButton = document.getElementById("shareBtn");
 
     copyButton.addEventListener('click', event => {
       navigator.clipboard.writeText("{{ associacao.nif }}").then(() => {
@@ -85,18 +83,22 @@ permalink: "/{{ associacao.nif }}/index.html"
     });
 
     if (navigator.share) {
-      shareButton.disabled = false;
-
+      const shareButton = document.createElement("button");
+      shareButton.appendChild(document.createTextNode("Partilhar"));
+      
       shareButton.addEventListener('click', event => {
         navigator.share({
           title: "{{ associacao.nome }} ({{ associacao.nif }})",
           url: new URL(window.location.href),
           text: "Consignar IRS à associação {{ associacao.nome }}, com NIF {{ associacao.nif }}, em {{ associacao.localidade }}."
         }).then(() => {
-          console.log('Thanks for sharing!');
+          console.log('Consignar IRS à associação {{ associacao.nome }}, com NIF {{ associacao.nif }}, é uma ótima forma de apoiar a sua causa! Obrigado por partilhar.');
         })
         .catch(console.error);
       });
+
+      const buttonsContainer = document.getElementById("action-buttons-container");
+      buttonsContainer.appendChild(shareButton);
     };
   </script>
 </body>
